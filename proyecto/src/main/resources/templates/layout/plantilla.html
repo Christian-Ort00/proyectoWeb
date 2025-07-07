@@ -18,7 +18,7 @@
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
                     <!-- Marca a la izquierda -->
-                    <a class="navbar-brand" href="#">MODAVERSE</a>
+                    <a class="navbar-brand" th:href="@{/}">MODAVERSE</a>
 
                    
 
@@ -28,7 +28,7 @@
                       
                         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link " aria-current="page" href="#">Hombre</a>
+                                <a class="nav-link " aria-current="page" th:href="@{/productos/listado}">Hombre</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Mujer</a>
@@ -43,8 +43,9 @@
 
                        
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="bi bi-person"></i></a>
+                            <li class="nav-item"> 
+                                 
+                                <a class="nav-link" th:href="@{/usuario/inicioSesion}"><i class="bi bi-person"></i></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#"><i class="bi bi-cart"></i></a>
