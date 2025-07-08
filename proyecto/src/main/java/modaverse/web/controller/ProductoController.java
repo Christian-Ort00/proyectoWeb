@@ -12,13 +12,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Slf4j
-@RequestMapping("/productos")
-public class ProductosController {
+@RequestMapping("/producto")
+public class ProductoController {
 
     
     @GetMapping("/listado")
     public String mostrarInicioSesion() {
-        return "productos/listado";
+        return "producto/listado";
+    }
+    
+     @GetMapping("/gestionar")
+    public String mostrarGestionProductos() {
+        return "producto/gestionar";
     }
 
 }

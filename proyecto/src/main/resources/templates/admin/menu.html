@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+
+    <head th:replace="~{layout/plantilla :: head}">
+
+        <title>MODAVERSE</title>        
+    </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"/>
+        <div class="row">
+            <div class=" col text-align-center">
+                <h2>Panel de administrador</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class=" col-6 text-align-center ">
+                <div class="row m-3">
+                    <a class="btn btn-secondary" th:href="@{/producto/gestionar}">Productos</a>
+                </div>
+                <div class="row m-3">
+                    <button type="button" class="btn btn-secondary">Pedidos</button>
+
+                </div>
+                <div class="row m-3">
+                    <button type="button" class="btn btn-secondary">Usuarios</button>
+
+                </div>
+                <div class="row m-3">
+                    <button type="button" class="btn btn-secondary">Reportes</button>
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+        <footer th:replace="~{layout/plantilla :: footer}"/>          
+    </body>
+</html>
