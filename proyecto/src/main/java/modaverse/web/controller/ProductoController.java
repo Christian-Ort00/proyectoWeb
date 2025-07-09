@@ -22,4 +22,9 @@ public class ProductoController {
         model.addAttribute("productos", productos);
         return "producto/listado";
     }
+    
+    @GetMapping("/gestionar")
+    public String gestionarProductos(){
+        return "producto/gestionar";
+    }
 }
