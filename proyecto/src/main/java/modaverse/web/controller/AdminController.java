@@ -21,6 +21,12 @@ public class AdminController {
         return "admin/menu";
     }
     
+    @GetMapping("/reporte")
+    public String mostrarReporteVentas() {
+        return "admin/reporteVentas";
+    }
+    
+    
    
 
 }
