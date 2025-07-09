@@ -4,6 +4,10 @@
 <head th:replace="~{layout/plantilla :: head}">
 
     <title>MODAVERSE</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link th:href="@{/css/estilos.css}" rel="stylesheet" />
 </head>
 
 <body>
@@ -21,44 +25,127 @@
 
     <section class="container py-5">
         <!-- <h4>Productos destacados</h4> -->
-         <h3 class="fs-4 fw-semibold mb-4">Productos destacados</h3>
-        <div id="carouselExample" class="carousel slide ">
+        <h3 class="fs-4 fw-semibold mb-4">Productos destacados</h3>
+        <!--
+           <div id="carouselExample" class="carousel slide ">
+               <div class="carousel-inner">
+                   <div class="carousel-item active d-flex justify-content-center gap-3">
+                       <div class="card" style="width: 18rem;">
+                           <img th:src="@{/img/tennis.png}" class="card-img-top" alt="...">
+                           <div class="card-body">
+                               <h5 class="card-title">Tennis</h5>
+                               <p class="card-text">25000</p>
+                               <a href="#" class="btn btn-primary">Agregar</a>
+                           </div>
+                       </div>
+                       <div class="card" style="width: 18rem;">
+                           <img th:src="@{/img/jeans.png}" class="card-img-top" alt="...">
+                           <div class="card-body">
+                               <h5 class="card-title">Jeans</h5>
+                               <p class="card-text">25000</p>
+                               <a href="#" class="btn btn-primary">Agregar</a>
+                           </div>
+                       </div>
+                       <div class="card" style="width: 18rem;">
+                           <img th:src="@{/img/camiseta.png}" class="card-img-top" alt="...">
+                           <div class="card-body">
+                               <h5 class="card-title">Camiseta Negra</h5>
+                               <p class="card-text">25000</p>
+                               <a href="#" class="btn btn-primary">Agregar</a>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev"
+                   style="filter: invert(1)">
+                   <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+                   <span class="visually-hidden">Previous</span>
+               </button>
+               <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next"
+                   style="filter: invert(1)">
+                   <span class="carousel-control-next-icon" aria-hidden="false"></span>
+                   <span class="visually-hidden">Next</span>
+               </button>
+           </div>
+            -->
+
+        <div id="carouselExampleControls" class="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active d-flex justify-content-center gap-3">
-                    <div class="card" style="width: 18rem;">
-                        <img th:src="@{/img/tennis.png}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Tennis</h5>
-                            <p class="card-text">25000</p>
-                            <a href="#" class="btn btn-primary">Agregar</a>
+                <div class="carousel-item">
+                    <div class="card card-custom">
+                        <div class="img-wrapper"><img th:src="@{/img/jeans.png}" class="d-block w-100" alt="...">
                         </div>
-                    </div>
-                    <div class="card" style="width: 18rem;">
-                        <img th:src="@{/img/jeans.png}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Jeans</h5>
-                            <p class="card-text">25000</p>
-                            <a href="#" class="btn btn-primary">Agregar</a>
+                            <p class="price">₡25.000</p>
+                            <a href="#" class="btn btn-primary">Añadir al carrito</a>
                         </div>
                     </div>
-                    <div class="card" style="width: 18rem;">
-                        <img th:src="@{/img/camiseta.png}" class="card-img-top" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <div class="card card-custom">
+                        <div class="img-wrapper"><img th:src="@{/img/tennis.png}" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Tennis</h5>
+                            <p class="price">₡25.000</p>
+                            <a href="#" class="btn btn-primary">Añadir al carrito</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="card card-custom">
+                        <div class="img-wrapper"><img th:src="@{/img/camiseta.png}" class="d-block w-100" alt="...">
+                        </div>
                         <div class="card-body">
                             <h5 class="card-title">Camiseta Negra</h5>
-                            <p class="card-text">25000</p>
-                            <a href="#" class="btn btn-primary">Agregar</a>
+                            <p class="price">₡25.000</p>
+                            <a href="#" class="btn btn-primary">Añadir al carrito</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="card card-custom">
+                        <div class="img-wrapper"><img th:src="@{/img/jeans.png}" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Jeans</h5>
+                            <p class="price">₡25.000</p>
+                            <a href="#" class="btn btn-primary">Añadir al carrito</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="card card-custom">
+                        <div class="img-wrapper"><img th:src="@{/img/tennis.png}" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Tennis</h5>
+                            <p class="price">₡25.000</p>
+                            <a href="#" class="btn btn-primary">Añadir al carrito</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="card card-custom">
+                        <div class="img-wrapper"><img th:src="@{/img/camiseta.png}" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Camiseta Negra</h5>
+                            <p class="price">₡25.000</p>
+                            <a href="#" class="btn btn-primary">Añadir al carrito</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev"
-                style="filter: invert(1)">
-                <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next"
-                style="filter: invert(1)">
-                <span class="carousel-control-next-icon" aria-hidden="false"></span>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
@@ -66,6 +153,8 @@
 
 
     <footer th:replace="~{layout/plantilla :: footer}" />
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
 </body>
 
 </html>
