@@ -1,41 +1,47 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 
-    <head th:replace="~{layout/plantilla :: head}">
+<head th:replace="~{layout/plantilla :: head}">
 
-        <title>MODAVERSE</title>        
-    </head>
-    <body>
-        <header th:replace="~{layout/plantilla :: header}"/>
-        <div class="row">
-            <div class=" col text-align-center">
-                <h2>Panel de administrador</h2>
-            </div>
+    <title>MODAVERSE</title>
+</head>
+
+<body>
+    <header th:replace="~{layout/plantilla :: header}" />
+    <div class="row">
+        <div class=" col-6 text-center">
+            <h2 class="m-0">Panel de administrador</h2>
         </div>
-        <div class="row">
-            <div class=" col-6 text-align-center ">
-                <div class="row m-3">
-                    <a class="btn btn-secondary" th:href="@{/producto/gestionar}">Productos</a>
-                </div>
-                <div class="row m-3">
-                    <button type="button" class="btn btn-secondary">Pedidos</button>
-
-                </div>
-                <div class="row m-3">
-                    <a class="btn btn-secondary" th:href="@{/usuario/gestion}">Usuarios</a>
-                </div>
-                <div class="row m-3">
-                    <button type="button" class="btn btn-secondary">Reportes</button>
-
-                </div>
-
-
-
+        <div class=" col-6 text-align-center">
+            <h2 class="m-0"></h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class=" col-6 text-align-center ">
+            <div class="row m-3">
+                <a class="btn btn-secondary" th:href="@{/producto/gestionar}">Productos</a>
+            </div>
+            <div class="row m-3">
+                <button type="button" class="btn btn-secondary">Pedidos</button>
 
             </div>
-        </div>
+            <div class="row m-3">
+                <a class="btn btn-secondary" th:href="@{/usuario/gestion}">Usuarios</a>
+            </div>
+            <div class="row m-3">
+                <button type="button" class="btn btn-secondary">Reportes</button>
 
-        <footer th:replace="~{layout/plantilla :: footer}"/>          
-    </body>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+    <footer th:replace="~{layout/plantilla :: footer}" />
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+
 </html>
