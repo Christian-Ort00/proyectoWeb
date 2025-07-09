@@ -11,12 +11,12 @@
 
         <div class="row text-center">
             <div class="col ">
-                <h3>Gestión de Productos</h3>
+                <h3>Gestión de Usuarios</h3>
             </div>
         </div>
         <div class="row text-center">
             <div class="col-6 mx-auto mb-3">
-                <input type="text" class="form-control" placeholder="Buscar Producto"/>
+                <input type="text" class="form-control" placeholder="Buscar Usuario"/>
             </div>   
         </div>
 
@@ -24,7 +24,7 @@
         <!-- Botón para abrir el modal de agregar -->
         <div class="text-center mb-4">
             <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#agregarProductoModal">
-                Agregar Producto
+                Agregar Usuario
             </button>
         </div>
         <!-- Modal para agregar árbol -->
@@ -33,7 +33,7 @@
                 <div class="modal-content">
                     <form  method="post"  class="was-validated">
                         <div class="modal-header bg-success text-white">
-                            <h5 class="modal-title" id="agregarProductoLabel">Agregar Producto</h5>
+                            <h5 class="modal-title" id="agregarProductoLabel">Agregar Usuarios</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                         </div>
                         <div class="modal-body">
@@ -42,15 +42,19 @@
                                 <input type="text" class="form-control"  required>
                             </div>
                             <div class="mb-3">
-                                <label for="decripcion" class="form-label">Descripcion</label>
+                                <label for="apellidos" class="form-label">Apellidos</label>
                                 <input type="text" class="form-control"  required>
                             </div>
                             <div class="mb-3">
-                                <label for="precio" class="form-label">Precio</label>
-                                <input type="number" class="form-control"  required>
+                                <label for="correo" class="form-label">Correo</label>
+                                <input type="email" class="form-control"  required>
                             </div>
                             <div class="mb-3">
-                                <label for="imagen" class="form-label">URL de Imagen</label>
+                                <label for="contrasena" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control"  required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="rol" class="form-label">Rol</label>
                                 <input type="text" class="form-control"  required>
                             </div>
                         </div>
@@ -64,10 +68,10 @@
         </div>
 
 
-        <section th:fragment="listadoProductos" class="container mt-4">
+        <section th:fragment="listadoUsuarios" class="container mt-4">
             <div class="card">
                 <div class="card-header bg-secondary text-white">
-                    <h4>Listado de Productos</h4>
+                    <h4>Listado de Usuarios</h4>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered table-hover">
@@ -75,9 +79,10 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nombre</th>
-                                <th>Descripcion</th>
-                                <th>Precio</th>
-                                <th>Imagen</th>
+                                <th>Apellidos</th>
+                                <th>Correo</th>
+                                <th>Contraseña</th>
+                                <th>Rol</th>
                             </tr>
                         </thead>
                         <tbody>
