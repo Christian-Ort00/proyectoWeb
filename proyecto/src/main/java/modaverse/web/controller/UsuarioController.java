@@ -19,4 +19,9 @@ public class UsuarioController {
     public String mostrarRegistroUsuario() {
         return "usuario/registroUsuario";
     }
+    
+    @GetMapping("/gestion")
+    public String mostrarGestionUsuario() {
+        return "usuario/gestion";
+    }
 }
