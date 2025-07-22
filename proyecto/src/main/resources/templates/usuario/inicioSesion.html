@@ -2,35 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 
 <head th:replace="~{layout/plantilla :: head}">
-
     <title>MODAVERSE</title>
 </head>
 
 <body>
     <header th:replace="~{layout/plantilla :: header}" />
 
-
-
     <div class="container">
         <div class="row m-3 justify-content-center">
             <div class="col-6 text-center">
                 <h2>Inicio de Sesión</h2>
 
-                <h6>Usuario:</h6>
-                <input type="email" class="form-control mb-3" placeholder="Ingresa tu correo" />
+                <form th:action="@{/usuario/iniciarSesion}" method="post">
+                    <h6>Usuario:</h6>
+                    <input type="email" class="form-control mb-3" name="correo" placeholder="Ingresa tu correo" required />
 
-                <h6>Contraseña:</h6>
-                <input type="password" class="form-control mb-3" placeholder="Ingresa tu contraseña" />
+                    <h6>Contraseña:</h6>
+                    <input type="password" class="form-control mb-3" name="contrasena" placeholder="Ingresa tu contraseña" required />
 
-                <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+                    <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+                </form>
 
-                <p class="mt-3">Aún no tienes cuenta?</p>
+                <div th:if="${error}" class="alert alert-danger mt-3" th:text="${error}"></div>
+
+                <p class="mt-3">¿Aún no tienes cuenta?</p>
                 <a th:href="@{/usuario/registroUsuario}" class="text-decoration-none">Regístrate aquí</a>
             </div>
         </div>
     </div>
-
-
 
     <footer th:replace="~{layout/plantilla :: footer}" />
     <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>

@@ -88,13 +88,13 @@
                             <td th:text="${producto.descripcion}"></td>
                             <td th:text="${producto.precio} + ' CRC'"></td>
                             <td>
-                                <img th:src="@{${producto.rutaImagen}}" alt="Imagen" width="80" height="80">
+                                <img th:src="${producto.rutaImagen}" alt="Imagen" width="80" height="80">
                             </td>
                             <td>
-                                <a th:href="@{/producto/eliminar/}+${producto.productoID}" class="btn btn-danger btn-sm">
+                                <a th:href="@{/producto/eliminar/{id}(id=${producto.productoID})}" class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash"></i>
                                 </a>
-                                <a th:href="@{/producto/modificar/}+${producto.productoID}" class="btn btn-warning btn-sm">
+                                <a th:href="@{/producto/modificar/{id}(id=${producto.productoID})}" class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i>
                                 </a>
                             </td>
