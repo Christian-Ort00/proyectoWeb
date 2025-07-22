@@ -1,40 +1,43 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 
-    <head th:replace="~{layout/plantilla :: head}">
+<head th:replace="~{layout/plantilla :: head}">
 
-        <title>MODAVERSE</title>        
-    </head>
-    <body>
-        <header th:replace="~{layout/plantilla :: header}"/>
+    <title>MODAVERSE</title>
+</head>
+
+<body>
+    <header th:replace="~{layout/plantilla :: header}" />
 
 
 
-        <div class="container">
-            <div class="row m-3 justify-content-center">
-                <div class="col-6 text-center">
-                    <h2>Registro Usuario</h2>
+    <div class="container">
+        <div class="row m-3 justify-content-center">
+            <div class="col-6 text-center">
+                <h2>Registro Usuario</h2>
 
-                    <h6>Nombre de usuario:</h6>
-                    <input type="text" class="form-control mb-3" placeholder="Ingresa tu nombre"/>
+                <h6>Nombre de usuario:</h6>
+                <input type="text" class="form-control mb-3" placeholder="Ingresa tu nombre" />
 
-                    <h6>Correo electronico:</h6>
-                    <input type="email" class="form-control mb-3" placeholder="Ingresa tu correo electronico"/>
-                    
-                    <h6>Contraseña:</h6>
-                    <input type="password" class="form-control mb-3" placeholder="Ingresa tu contraseña"/>
-               
+                <h6>Correo electronico:</h6>
+                <input type="email" class="form-control mb-3" placeholder="Ingresa tu correo electronico" />
 
-                    <button type="submit" class="btn btn-primary w-100">Registrase</button>
+                <h6>Contraseña:</h6>
+                <input type="password" class="form-control mb-3" placeholder="Ingresa tu contraseña" />
 
-                   
-                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Registrase</button>
+
+
             </div>
         </div>
+    </div>
 
 
 
-        <footer th:replace="~{layout/plantilla :: footer}"/>          
-    </body>
+    <footer th:replace="~{layout/plantilla :: footer}" />
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+
 </html>
