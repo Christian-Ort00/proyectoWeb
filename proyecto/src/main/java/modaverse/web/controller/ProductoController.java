@@ -28,6 +28,7 @@ public class ProductoController {
         var productos = productoService.getProductos();
         model.addAttribute("productos", productos);
         return "producto/listado";
+      
     }
 
     // Vista para el panel del administrador

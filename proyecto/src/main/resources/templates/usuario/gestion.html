@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 
 <head th:replace="~{layout/plantilla :: head}">
-
     <title>MODAVERSE</title>
 </head>
 
@@ -21,47 +20,42 @@
         </div>
     </div>
 
-
     <!-- Botón para abrir el modal de agregar -->
     <div class="text-center mb-4">
-        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#agregarProductoModal">
+        <!-- <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#agregarProductoModal">
             Agregar Usuario
-        </button>
+        </button> -->
     </div>
-    <!-- Modal para agregar árbol -->
-    <div class="modal fade" id="agregarProductoModal" tabindex="-1" aria-labelledby="agregarProductoLabel"
-        aria-hidden="true">
+
+    <!-- Modal para agregar usuario -->
+    <div class="modal fade" id="agregarProductoModal" tabindex="-1" aria-labelledby="agregarProductoLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form method="post" class="was-validated">
-                    <div class="modal-header bg-success text-white">
-                        <h5 class="modal-title" id="agregarProductoLabel">Agregar Usuarios</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                    </div>
+                <form th:action="@{/usuario/guardar}" th:object="${usuario}" method="post" class="was-validated">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" required>
+                            <input type="text" th:field="*{nombre}" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label for="apellidos" class="form-label">Apellidos</label>
-                            <input type="text" class="form-control" required>
+                            <input type="text" th:field="*{apellidos}" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label for="correo" class="form-label">Correo</label>
-                            <input type="email" class="form-control" required>
+                            <input type="email" th:field="*{correo}" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label for="contrasena" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" required>
+                            <input type="password" th:field="*{contrasena}" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label for="rol" class="form-label">Rol</label>
-                            <input type="text" class="form-control" required>
+                            <input type="text" th:field="*{rol}" class="form-control" required>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Guardar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </form>
@@ -69,8 +63,8 @@
         </div>
     </div>
 
-
-    <section th:fragment="listadoUsuarios" class="container mt-4">
+    <!-- Listado de usuarios -->
+    <section class="container mt-4">
         <div class="card">
             <div class="card-header bg-secondary text-white">
                 <h4>Listado de Usuarios</h4>
@@ -85,31 +79,33 @@
                             <th>Correo</th>
                             <th>Contraseña</th>
                             <th>Rol</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!--   <tr th:each="arbol, i : ${arboles}">
-                                <td th:text="${i.count}">1</td>
-                                <td><img th:src="${arbol.imagen}" alt="Imagen" width="80" height="80"></td>
-                                <td th:text="${arbol.nombre}">Nombre</td>
-                                <td th:text="${arbol.edad}">Edad</td>
-                                <td>
-                                    <a th:href="@{/arbol/eliminar/}+${arbol.id}" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                    <a th:href="@{/arbol/modificar/}+${arbol.id}" class="btn btn-warning btn-sm">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                </td>
-                            </tr> -->
+                        <tr th:each="usuario, i : ${usuarios}">
+                            <td th:text="${i.count}">1</td>
+                            <td th:text="${usuario.nombre}">Nombre</td>
+                            <td th:text="${usuario.apellidos}">Apellidos</td>
+                            <td th:text="${usuario.correo}">Correo</td>
+                            <td th:text="${usuario.contrasena}">•••••</td>
+                            <td th:text="${usuario.rol}">Rol</td>
+                            <td>
+                                <a th:href="@{/usuario/eliminar/{id}(id=${usuario.usuarioID})}" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                                <a th:href="@{/usuario/modificar/{id}(id=${usuario.usuarioID})}" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </section>
 
-
-    <footer th:replace="~{layout/plantilla :: footer}"> </footer>
+    <footer th:replace="~{layout/plantilla :: footer}"></footer>
     <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/js/main.js}"></script>
 </body>

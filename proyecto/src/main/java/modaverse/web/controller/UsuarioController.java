@@ -3,6 +3,7 @@ package modaverse.web.controller;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import modaverse.web.dao.UsuarioDao;
+import modaverse.web.service.UsuarioService;
 import modaverse.web.domain.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioDao usuarioDao;
+    
+     @Autowired
+    private UsuarioService usuarioService;
 
     @GetMapping("/inicioSesion")
     public String mostrarInicioSesion() {
@@ -36,7 +40,7 @@ public class UsuarioController {
             if ("admin".equalsIgnoreCase(usuario.getRol())) {
                 return "redirect:/admin/menu";
             } else {
-                return "redirect:/productos/hombre";
+                return "redirect:/producto/listado";
             }
         } else {
             model.addAttribute("error", "Correo o contraseña incorrectos");
@@ -71,12 +75,17 @@ public class UsuarioController {
         if ("admin".equalsIgnoreCase(rol)) {
             return "redirect:/admin/menu";
         } else {
-            return "redirect:/productos/hombre";
+            return "redirect:/producto/listado";
         }
     }
-
     @GetMapping("/gestion")
-    public String mostrarGestionUsuario() {
-        return "usuario/gestion";
-    }
+    public String mostrarGestionUsuario(Model model) {
+    // Add the list of users for the table
+    model.addAttribute("usuarios", usuarioService.getUsuarios());
+    // Add an empty user object for the form
+    model.addAttribute("usuario", new Usuario());
+    return "usuario/gestion";
 }
+}
+   
+
