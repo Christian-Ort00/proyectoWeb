@@ -16,6 +16,12 @@ public class ProductoController {
     @Autowired
     private ProductoService productoService;
 
+    // Redirección desde /producto/hombre
+    @GetMapping("/hombre")
+    public String redirigirAHombre() {
+        return "redirect:/producto/listado";
+    }
+
     // Vista para clientes (productos en tarjetas)
     @GetMapping("/listado")
     public String mostrarProductos(Model model) {
@@ -52,6 +58,6 @@ public class ProductoController {
     public String modificarProducto(@PathVariable("productoID") Long productoID, Model model) {
         var producto = productoService.getProducto(productoID);
         model.addAttribute("producto", producto);
-        return "producto/gestionar"; 
+        return "producto/gestionar";
     }
 }
