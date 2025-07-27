@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head>
+        <title> Modaverse </title>
+    </head>
+
+    <body>
+        <!-- Botón Agregar -->
+       <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <button type="button" 
+                                class="btn btn-primary btn-block" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#agregarCategoria">
+                            <i class="fas fa-plus"></i> Agregar Categoria
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Modal para agregar categoría -->
+        <section th:fragment="agregarCategoria">
+            <div id="agregarCategoria" 
+                 class="modal fade" 
+                 tabindex="-1" 
+                 aria-labelledby="modalLabel" 
+                 aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">Agregar Categoria</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form th:action="@{/categoria/guardar}" 
+                              th:object="${categoria}" 
+                              method="POST" 
+                              class="was-validated">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="nombre">Nombre</label>
+                                    <input type="text" class="form-control" 
+                                           id="nombre" 
+                                           th:field="*{nombre}" 
+                                           required />
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">
+                                    Guardar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- 3. Listado de categorías -->
+        <section th:fragment="listadoCategorias" id="categorias">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Listado de Categorías</h4>
+                            </div>
+                            <div th:if="${categorias != null and !categorias.empty}">
+                                <table class="table table-striped table-hover">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nombre</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="categoria, contador : ${categorias}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td>[[${categoria.nombre}]]</td>
+                                            <td>
+                                                <a th:href="@{/categoria/eliminar/{id}(id=${categoria.categoriaID})}" class="btn btn-danger btn-sm">
+                                                    <i class="fas fa-trash"></i> Eliminar
+                                                </a>
+                                                <a th:href="@{/categoria/modificar/{id}(id=${categoria.categoriaID})}" class="btn btn-success btn-sm">
+                                                    <i class="fas fa-pencil"></i> Editar
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2" th:if="${categorias == null or categorias.empty}">
+                                <span>No hay categorías registradas.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Fragmento para editar categoría -->
+        <section th:fragment="editarCategoria">
+            <div class="container mt-4">
+                <form method="POST" th:action="@{/categoria/guardar}" th:object="${categoria}" class="was-validated">
+                    <input type="hidden" th:field="*{categoriaID}" />
+                    <div class="card">
+                        <div class="card-header bg-warning">
+                            <h4>Editar Categoría</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" class="form-control" th:field="*{nombre}" required />
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between">
+                            <a th:href="@{/categoria/listado}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-check"></i> Guardar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    </body>
+</html>
