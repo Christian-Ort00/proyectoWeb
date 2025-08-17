@@ -1,91 +1,55 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package modaverse.web.controller;
 
-import jakarta.servlet.http.HttpSession;
-import lombok.extern.slf4j.Slf4j;
-import modaverse.web.dao.UsuarioDao;
-import modaverse.web.service.UsuarioService;
 import modaverse.web.domain.Usuario;
+import modaverse.web.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@Slf4j
 @RequestMapping("/usuario")
 public class UsuarioController {
 
     @Autowired
-    private UsuarioDao usuarioDao;
-    
-     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/inicioSesion")
-    public String mostrarInicioSesion() {
-        return "usuario/inicioSesion";
+    @GetMapping("/listado")
+    public String listado(Model model) {
+        var usuarios = usuarioService.getUsuarios();
+        model.addAttribute("usuarios", usuarios);
+        model.addAttribute("totalUsuarios", usuarios.size());
+        return "/usuario/listado";
     }
 
-    @PostMapping("/iniciarSesion")
-    public String iniciarSesion(
-            @RequestParam String correo,
-            @RequestParam String contrasena,
-            HttpSession session,
-            Model model
-    ) {
-        Usuario usuario = usuarioDao.findByCorreoAndContrasena(correo, contrasena);
-
-        if (usuario != null) {
-            session.setAttribute("usuarioActual", usuario);
-            if ("admin".equalsIgnoreCase(usuario.getRol())) {
-                return "redirect:/admin/menu";
-            } else {
-                return "redirect:/producto/listado";
-            }
-        } else {
-            model.addAttribute("error", "Correo o contraseña incorrectos");
-            return "usuario/inicioSesion";
-        }
+    @GetMapping("/nuevo")
+    public String usuarioNuevo(Usuario usuario) {
+        return "/usuario/modifica";
     }
 
-    @GetMapping("/registroUsuario")
-    public String mostrarRegistroUsuario() {
-        return "usuario/registroUsuario";
+    @PostMapping("/guardar")
+    public String usuarioGuardar(Usuario usuario) {
+        // Sin carga de imagen: simplemente guarda/actualiza
+        usuarioService.save(usuario, true);
+        return "redirect:/usuario/listado";
     }
 
-    @PostMapping("/registrar")
-    public String registrarUsuario(
-            @RequestParam String nombre,
-            @RequestParam String apellidos,
-            @RequestParam String correo,
-            @RequestParam String contrasena,
-            @RequestParam String rol,
-            HttpSession session
-    ) {
-        Usuario nuevoUsuario = new Usuario();
-        nuevoUsuario.setNombre(nombre);
-        nuevoUsuario.setApellidos(apellidos);
-        nuevoUsuario.setCorreo(correo);
-        nuevoUsuario.setContrasena(contrasena);
-        nuevoUsuario.setRol(rol);
-
-        usuarioDao.save(nuevoUsuario);
-        session.setAttribute("usuarioActual", nuevoUsuario);
-
-        if ("admin".equalsIgnoreCase(rol)) {
-            return "redirect:/admin/menu";
-        } else {
-            return "redirect:/producto/listado";
-        }
+    @GetMapping("/eliminar/{usuarioID}")
+    public String usuarioEliminar(Usuario usuario) {
+        usuarioService.delete(usuario);
+        return "redirect:/usuario/listado";
     }
-    @GetMapping("/gestion")
-    public String mostrarGestionUsuario(Model model) {
-    // Add the list of users for the table
-    model.addAttribute("usuarios", usuarioService.getUsuarios());
-    // Add an empty user object for the form
-    model.addAttribute("usuario", new Usuario());
-    return "usuario/gestion";
+
+    @GetMapping("/modificar/{usuarioID}")
+    public String usuarioModificar(Usuario usuario, Model model) {
+        usuario = usuarioService.getUsuario(usuario);
+        model.addAttribute("usuario", usuario);
+        return "/usuario/modifica";
+    }
 }
-}
-   
-
