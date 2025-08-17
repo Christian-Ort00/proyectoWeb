@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="~{layout/plantilla :: head}">
+  <title>MODAVERSE</title>
+  <meta charset="UTF-8"/>
+</head>
+<body>
+  <header th:replace="~{layout/plantilla :: header}"></header>
+
+  <div class="container my-5">
+    <div class="row m-3 justify-content-center">
+      <div class="col-12 col-md-6 text-center">
+        <h2>Inicio de Sesión</h2>
+
+        <!-- Mantengo /login para Spring Security -->
+        <form method="post" th:action="@{/login}" class="text-start">
+          <!-- CSRF -->
+          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+          <h6 class="mt-3">Usuario o correo:</h6>
+          <!-- name="username" es requerido por Spring Security -->
+          <input type="text" class="form-control mb-3" name="username"
+                 placeholder="usuario@correo.com" required />
+
+          <h6>Contraseña:</h6>
+          <!-- name="password" es requerido por Spring Security -->
+          <input type="password" class="form-control mb-3" name="password"
+                 placeholder="••••••••" required />
+
+          <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+        </form>
+
+        <!-- Mensajes -->
+        <div th:if="${param.error}" class="alert alert-danger mt-3">
+          Usuario o contraseña incorrectos.
+        </div>
+        <div th:if="${param.logout}" class="alert alert-success mt-3">
+          Sesión cerrada correctamente.
+        </div>
+
+        <p class="mt-3">¿Aún no tienes cuenta?</p>
+        <a th:href="@{/usuario/registroUsuario}" class="text-decoration-none">Regístrate aquí</a>
+
+        <div class="mt-2">
+          <a th:href="@{/registro/recordar}" class="text-decoration-none">¿Olvidaste tu contraseña?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer th:replace="~{layout/plantilla :: footer}"></footer>
+  <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/js/main.js}"></script>
+</body>
+</html>
