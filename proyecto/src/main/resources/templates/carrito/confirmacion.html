@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Compra realizada</title>
+</head>
+<body>
+<header th:replace="~{layout/plantilla :: header}"/>
+
+<div class="container mt-5 text-center">
+    <h2 class="text-success">✅ ¡Gracias por tu compra!</h2>
+    <p>Tu pedido ha sido registrado exitosamente.</p>
+    <a th:href="@{/}" class="btn btn-primary mt-3">Volver al catálogo</a>
+</div>
+
+<footer th:replace="~{layout/plantilla :: footer}"/>
+</body>
+</html>

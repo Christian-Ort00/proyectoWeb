@@ -15,21 +15,14 @@ public class Venta implements Serializable {
     @Column(name = "id_venta")
     private Long idVenta;
 
-    @Column(name = "id_factura")
-    private Long idFactura;
+    @ManyToOne
+    @JoinColumn(name = "id_factura")
+    private Factura factura;
 
-    @Column(name = "id_producto")
-    private Long idProducto; // referencia a producto.productoID
+    @ManyToOne
+    @JoinColumn(name = "id_producto")
+    private Producto producto;
 
-    private double precio;
-    private int cantidad;
-
-    public Venta() {}
-
-    public Venta(Long idFactura, Long idProducto, double precio, int cantidad) {
-        this.idFactura = idFactura;
-        this.idProducto = idProducto;
-        this.precio = precio;
-        this.cantidad = cantidad;
-    }
+    private Double precio;
+    private Integer cantidad;
 }
