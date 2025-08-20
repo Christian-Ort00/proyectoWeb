@@ -24,7 +24,8 @@
                         <h5 class="card-title" th:text="${producto.nombre}">Nombre</h5>
                         <p class="card-text" th:text="${producto.descripcion}">Descripción</p>
                         <p class="card-text fw-bold">₡ <span th:text="${producto.precio}">0</span></p>
-                        <a href="#" class="btn btn-primary mt-auto">Agregar al carrito</a>
+<a th:href="@{/carrito/agregar/{id}(id=${producto.productoID})}" 
+   class="btn btn-primary mt-auto">Agregar al carrito</a>
                     </div>
                 </div>
             </div>

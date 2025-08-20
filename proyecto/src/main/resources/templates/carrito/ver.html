@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Carrito</title>
+</head>
+<body>
+<header th:replace="~{layout/plantilla :: header}"/>
+
+<div class="container mt-4">
+    <h2 class="mb-3">🛒 Carrito de Compras</h2>
+
+    <table class="table table-striped" th:if="${items != null and !items.empty}">
+        <thead class="table-dark">
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item : ${items}">
+                <td th:text="${item.producto.nombre}"></td>
+                <td>₡ <span th:text="${item.producto.precio}"></span></td>
+                <td th:text="${item.cantidad}"></td>
+                <td>₡ <span th:text="${item.subtotal}"></span></td>
+                <td>
+                    <a th:href="@{/carrito/eliminar/{id}(id=${item.producto.productoID})}" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${items == null or items.empty}">
+        <p class="text-muted">Tu carrito está vacío</p>
+    </div>
+
+    <div class="mt-3" th:if="${items != null and !items.empty}">
+        <h4>Total: ₡ <span th:text="${total}"></span></h4>
+        <a th:href="@{/carrito/vaciar}" class="btn btn-warning">Vaciar carrito</a>
+        <a th:href="@{/carrito/finalizar}" class="btn btn-success">Finalizar compra</a>
+    </div>
+</div>
+
+<footer th:replace="~{layout/plantilla :: footer}"/>
+</body>
+</html>
