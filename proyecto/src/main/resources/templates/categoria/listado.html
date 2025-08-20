@@ -1,24 +1,69 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-    <head th:replace="~{layout/plantilla :: head}">
-        <title>MODAVERSE - Categorías</title>
-    </head>
-    <body>
-        <!-- Header -->
-        <header th:replace="~{layout/plantilla :: header}"></header>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
 
-        <!-- Fragmento de botón "Agregar Categoría" -->
-        <section th:replace="~{categoria/fragmentos :: botonesAgregar}"></section>
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Categorías - MODAVERSE</title>        
+</head>
 
-        <!-- Modal para agregar categoría -->
-        <section th:replace="~{categoria/fragmentos :: agregarCategoria}"></section>
+<body>
+    <header th:replace="~{layout/plantilla :: header}"/>
 
-        <!-- Tabla con el listado de categorías -->
-        <section th:replace="~{categoria/fragmentos :: listadoCategorias}"></section>
+    <div class="container mt-5">
+        <h2 class="text-center fw-bold mb-4">Gestión de Categorías</h2>
 
-        <!-- Footer -->
-        <footer th:replace="~{layout/plantilla :: footer}"></footer>
-    </body>
+        <!-- Botón para crear nueva categoría -->
+        <div class="mb-3 text-end">
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#categoriaModal">
+                Nueva Categoría
+            </button>
+        </div>
+
+        <!-- Tabla de categorías -->
+        <table class="table table-bordered text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="cat : ${categorias}">
+                    <td th:text="${cat.categoriaID}"></td>
+                    <td th:text="${cat.nombre}"></td>
+                    <td>
+                        <a th:href="@{/categoria/modificar/{id}(id=${cat.categoriaID})}" class="btn btn-warning btn-sm">Editar</a>
+                        <a th:href="@{/categoria/eliminar/{id}(id=${cat.categoriaID})}" class="btn btn-danger btn-sm"
+                           onclick="return confirm('¿Seguro que deseas eliminar esta categoría?')">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal para crear categoría -->
+    <div class="modal fade" id="categoriaModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form th:action="@{/categoria/guardar}" method="post" th:object="${categoria}">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Nueva Categoría</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" th:field="*{nombre}" class="form-control" required/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="~{layout/plantilla :: footer}"/>          
+</body>
 </html>
