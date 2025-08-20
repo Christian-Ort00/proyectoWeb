@@ -53,12 +53,12 @@ public class CarritoController {
     @GetMapping("/finalizar")
     public String finalizarCompra() {
         if (carritoService.getItems().isEmpty()) {
-            return "redirect:/carrito/ver"; // no permite finalizar vacío
+            return "redirect:/carrito/ver"; 
         }
 
         // Crear factura
         Factura factura = new Factura();
-        factura.setIdUsuario(1L); // Por ahora fijo en el usuario "Juan" (UsuarioID=1 en tu BD)
+        factura.setIdUsuario(1L); 
         factura.setFecha(java.time.LocalDateTime.now());
         factura.setTotal(carritoService.getTotal());
         factura.setEstado(1);

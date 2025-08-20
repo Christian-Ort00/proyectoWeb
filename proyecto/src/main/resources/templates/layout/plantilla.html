@@ -28,7 +28,11 @@
                 <a href="#" class="text-decoration-none text-dark link-hover">Accesorios</a>
                 <a href="#" class="text-decoration-none text-dark link-hover">Ofertas</a>-->
                 
-                
+                <ul class="navbar-nav" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_VENDEDOR')"> 
+                    <li class="nav-item px-2">
+                        <a class="nav-link" th:href="@{/producto/gestionar}">Producto</a>
+                    </li>
+                </ul>
                 
                 
                 <ul class="navbar-nav" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_VENDEDOR')"> 
