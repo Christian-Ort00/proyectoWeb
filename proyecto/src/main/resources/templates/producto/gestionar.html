@@ -13,12 +13,7 @@
         </div>
     </div>
 
-    <!-- Buscar producto (solo visual por ahora) -->
-    <div class="row text-center">
-        <div class="col-6 mx-auto mb-3">
-            <input type="text" class="form-control" placeholder="Buscar Producto"/>
-        </div>   
-    </div>
+
 
     <!-- Botón para abrir el modal de agregar -->
     <div class="text-center mb-4">
@@ -55,10 +50,10 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Categoría</label>
-                            <select th:field="*{categoria}" class="form-select" required>
+                            <select th:field="*{categoria.categoriaID}" class="form-select" required>
                                 <option value="">Seleccione una categoría</option>
                                 <option th:each="cat : ${categorias}"
-                                        th:value="${cat}"
+                                        th:value="${cat.categoriaID}"
                                         th:text="${cat.nombre}">
                                 </option>
                             </select>
@@ -97,11 +92,13 @@
                             <td th:text="${i.count}"></td>
                             <td th:text="${producto.nombre}"></td>
                             <td th:text="${producto.descripcion}"></td>
-                            <td th:text="${producto.precio} + ' CRC'"></td>
+                            <td th:text="${producto.precio + ' CRC'}"></td>
                             <td>
                                 <img th:src="${producto.rutaImagen}" alt="Imagen" width="80" height="80">
                             </td>
-                            <td th:text="${producto.categoria?.nombre}">Sin categoría</td>
+                            <td th:text="${producto.categoria != null ? producto.categoria.nombre : 'Sin categoría'}">
+                                Sin categoría
+                            </td>
                             <td>
                                 <a th:href="@{/producto/eliminar/{id}(id=${producto.productoID})}" class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash"></i>
@@ -120,4 +117,3 @@
     <footer th:replace="~{layout/plantilla :: footer}"> </footer>
 </body>
 </html>
-
