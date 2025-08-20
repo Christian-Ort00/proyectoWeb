@@ -99,6 +99,7 @@
     <!-- Nav Menu -->
     <nav class="d-none d-md-flex gap-4 align-items-center">
         <a th:href="@{/producto/hombre}" class="text-decoration-none text-white link-hover">Hombre</a>
+        <a th:href="@{/producto/mujer}" class="text-decoration-none text-white link-hover">Mujer</a>
         <ul class="navbar-nav d-flex flex-row gap-3" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_VENDEDOR')"> 
             <li class="nav-item">
                 <a class="nav-link text-white link-hover" th:href="@{/producto/gestionar}">Producto</a>
