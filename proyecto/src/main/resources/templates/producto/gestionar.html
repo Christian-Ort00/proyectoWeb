@@ -4,69 +4,59 @@
 <head th:replace="~{layout/plantilla :: head}">
     <title>MODAVERSE - Gestión de Productos</title>
 </head>
+
 <body>
-    <header th:replace="~{layout/plantilla :: header}"></header>
+<header th:replace="~{layout/plantilla :: header}"></header>
 
-    <div class="row text-center mt-4">
-        <div class="col">
-            <h3>Gestión de Productos</h3>
-        </div>
-    </div>
-
-    <!-- Buscar producto (solo visual por ahora) -->
-    <div class="row text-center">
-        <div class="col-6 mx-auto mb-3">
-            <input type="text" class="form-control" placeholder="Buscar Producto"/>
-        </div>   
-    </div>
-
-    <!-- Botón para abrir el modal de agregar -->
-    <div class="text-center mb-4">
-        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#agregarProductoModal">
-            Agregar Producto
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="fw-bold">Gestión de Productos</h3>
+        <!-- Botón Agregar Producto -->
+        <button class="btn btn-danger shadow-sm" data-bs-toggle="modal" data-bs-target="#agregarProductoModal">
+            <i class="fas fa-plus me-2"></i> Agregar Producto
         </button>
     </div>
 
-    <!-- Modal para agregar producto -->
+    <!-- Modal para Agregar Producto -->
     <div class="modal fade" id="agregarProductoModal" tabindex="-1" aria-labelledby="agregarProductoLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content shadow-lg">
                 <form th:action="@{/producto/guardar}" th:object="${producto}" method="post" class="was-validated">
-                    <div class="modal-header bg-success text-white">
-                        <h5 class="modal-title" id="agregarProductoLabel">Agregar Producto</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title" id="agregarProductoLabel"><i class="fas fa-plus-circle me-2"></i>Agregar Producto</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label">Nombre</label>
-                            <input type="text" th:field="*{nombre}" class="form-control" required />
+                            <input type="text" th:field="*{nombre}" class="form-control" placeholder="Ingrese nombre" required />
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Descripción</label>
-                            <input type="text" th:field="*{descripcion}" class="form-control" required />
+                            <input type="text" th:field="*{descripcion}" class="form-control" placeholder="Ingrese descripción" required />
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Precio</label>
-                            <input type="number" th:field="*{precio}" class="form-control" required />
+                            <input type="number" th:field="*{precio}" class="form-control" placeholder="Ingrese precio" required />
                         </div>
                         <div class="mb-3">
                             <label class="form-label">URL de Imagen</label>
-                            <input type="text" th:field="*{rutaImagen}" class="form-control" required />
+                            <input type="text" th:field="*{rutaImagen}" class="form-control" placeholder="Ingrese URL de imagen" required />
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Categoría</label>
-                            <select th:field="*{categoria}" class="form-select" required>
+                            <select th:field="*{categoria.categoriaID}" class="form-select" required>
                                 <option value="">Seleccione una categoría</option>
                                 <option th:each="cat : ${categorias}"
-                                        th:value="${cat}"
+                                        th:value="${cat.categoriaID}"
                                         th:text="${cat.nombre}">
                                 </option>
                             </select>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Guardar</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-danger shadow-sm"><i class="fas fa-save me-1"></i> Guardar</button>
+                        <button type="button" class="btn btn-secondary shadow-sm" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </form>
             </div>
@@ -74,50 +64,48 @@
     </div>
 
     <!-- Tabla de productos -->
-    <section class="container mt-4">
-        <div class="card">
-            <div class="card-header bg-secondary text-white">
-                <h4>Listado de Productos</h4>
-            </div>
-            <div class="card-body">
-                <table class="table table-bordered table-hover">
-                    <thead class="table-secondary">
-                        <tr>
-                            <th>#</th>
-                            <th>Nombre</th>
-                            <th>Descripción</th>
-                            <th>Precio</th>
-                            <th>Imagen</th>
-                            <th>Categoría</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="producto, i : ${productos}">
-                            <td th:text="${i.count}"></td>
-                            <td th:text="${producto.nombre}"></td>
-                            <td th:text="${producto.descripcion}"></td>
-                            <td th:text="${producto.precio} + ' CRC'"></td>
-                            <td>
-                                <img th:src="${producto.rutaImagen}" alt="Imagen" width="80" height="80">
-                            </td>
-                            <td th:text="${producto.categoria?.nombre}">Sin categoría</td>
-                            <td>
-                                <a th:href="@{/producto/eliminar/{id}(id=${producto.productoID})}" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                                <a th:href="@{/producto/modificar/{id}(id=${producto.productoID})}" class="btn btn-warning btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+    <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0"><i class="fas fa-boxes me-2"></i>Listado de Productos</h4>
         </div>
-    </section>
+        <div class="card-body table-responsive">
+            <table class="table table-hover align-middle text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Imagen</th>
+                        <th>Categoría</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="producto, i : ${productos}">
+                        <td th:text="${i.count}"></td>
+                        <td th:text="${producto.nombre}"></td>
+                        <td th:text="${producto.descripcion}"></td>
+                        <td th:text="${producto.precio + ' CRC'}"></td>
+                        <td>
+                            <img th:src="@{'/img/' + ${producto.rutaImagen}}" alt="Imagen" class="img-fluid rounded" style="max-width:80px; max-height:80px;">
+                        </td>
+                        <td th:text="${producto.categoria != null ? producto.categoria.nombre : 'Sin categoría'}"></td>
+                        <td>
+                            <a th:href="@{/producto/eliminar/{id}(id=${producto.productoID})}" class="btn btn-sm btn-outline-danger shadow-sm">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr th:if="${productos == null or productos.isEmpty()}">
+                        <td colspan="7" class="text-muted">No hay productos registrados.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-    <footer th:replace="~{layout/plantilla :: footer}"> </footer>
+<footer th:replace="~{layout/plantilla :: footer}"></footer>
 </body>
 </html>
-
