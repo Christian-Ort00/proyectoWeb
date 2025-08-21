@@ -1,0 +1,204 @@
+/* ---------------- Hero ---------------- */
+.hero-image {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/img/fondo_index.jpg");
+  height: 24rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #212529; /* gris oscuro para hero text */
+  text-align: center;
+}
+
+.hero-text h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #212529; /* gris oscuro */
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: #212529; /* gris oscuro */
+}
+
+.hero-text button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 10px 25px;
+  color: white;
+  background-color: #212529; /* negro */
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hero-text button:hover {
+  background-color: #444; /* hover gris oscuro */
+  color: white;
+}
+
+.button-hero{
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+/* ---------------- Navbar / Dropdown ---------------- */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* ---------------- Carousel ---------------- */
+.carousel-inner {
+  padding: 1em;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  background-color: #e1e1e1;
+  width: 6vh;
+  height: 6vh;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media (min-width: 768px) {
+  .carousel-item {
+    margin-right: 0;
+    flex: 0 0 33.333333%;
+    display: block;
+  }
+  .carousel-inner {
+    display: flex;
+  }
+}
+
+/* ---------------- Tarjetas de productos ---------------- */
+.card {
+  margin: 0 0.5em;
+  box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
+  border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 4px 12px 16px 0 rgba(22, 22, 26, 0.25);
+}
+
+.card .img-wrapper {
+    max-width: 100%;
+    height: 13em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card img {
+    max-height: 100%;
+    object-fit: contain;
+}
+
+@media (max-width: 767px) {
+  .card .img-wrapper {
+    height: 17em;
+  }
+}
+
+.card-custom .card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: center;       
+}
+
+.card-custom .card-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #212529; /* gris oscuro */
+}
+
+.card-custom .card-text {
+  color: #555; /* gris medio para descripción */
+}
+
+.card-custom .price {
+  color: #dc3545; /* rojo para precio */
+  font-weight: 600;
+  margin-top: auto;
+  margin-bottom: 0.5rem;
+}
+
+.card-custom .btn-buy {
+  margin-top: auto;
+  background-color: #212529; /* negro */
+  border: none;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.card-custom .btn-buy:hover {
+  background-color: #444; /* hover gris oscuro */
+  color: white;
+}
+
+/* ---------------- Video Section ---------------- */
+.video-section {
+  margin-top: 80px;
+  margin-bottom: 50px;
+}
+
+/* ---------------- Botones generales ---------------- */
+.btn-custom {
+  border-radius: 50px;
+  font-weight: 600;
+  padding: 0.6rem 2rem;
+  transition: all 0.3s ease;
+}
+
+.btn-custom:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+/* ---------------- Textos / Utilidades ---------------- */
+.text-center {
+  text-align: center;
+}
+
+.mt-5 {
+  margin-top: 3rem !important;
+}
+
+.mb-5 {
+  margin-bottom: 3rem !important;
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2) !important;
+}
+/* Header links hover */
+header a.link-hover::after {
+    background: #ff4444; /* línea de acento roja */
+}
+
+header a:hover {
+    color: #ff4444 !important; /* texto rojo al pasar el mouse */
+}
